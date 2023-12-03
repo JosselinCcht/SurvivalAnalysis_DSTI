@@ -6,7 +6,7 @@ library(tidyr)
 library(forcats)
 
 # Assuming your CSV has a similar structure to the RDS file in the example
-df0 <- read_csv("Breast Cancer METABRIC.csv")
+df0 <- read_csv("Data/Breast Cancer METABRIC.csv")
 
 # Assuming 'df' is your dataframe
 df <- na.omit(df0)
