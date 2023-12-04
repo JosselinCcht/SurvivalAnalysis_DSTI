@@ -61,8 +61,20 @@ M1 <- coxph(Surv(`Overall Survival (Months)`, died_of_cancer) ~ `Tumor Size`, da
 # Model with 'Cellularity' as a predictor
 M2 <- coxph(Surv(`Overall Survival (Months)`, died_of_cancer) ~ `Cellularity`, data = df_clean)
 
-# Model with both 'Tumor Size' and 'Cellularity' as predictors
+# Model with all predictors
 M3 <- coxph(Surv(`Overall Survival (Months)`, died_of_cancer) ~ `Tumor Size` + `Cellularity` + `Age at Diagnosis` + `Type of Breast Surgery` + `Cancer Type Detailed` + `Pam50 + Claudin-low subtype` + `Nottingham prognostic index` + `Mutation Count` + `Lymph nodes examined positive`, data = df_clean)
+# Model with `Tumor Size` + `Cellularity` + `Age at Diagnosis`  + `Lymph nodes examined positive`+`Relapse Free Status` predictors
+
+M4 <- coxph(Surv(`Overall Survival (Months)`, died_of_cancer) ~ `Tumor Size` + `Cellularity` + `Age at Diagnosis`  + `Lymph nodes examined positive`+`Relapse Free Status`, data = df_clean)
+# Model with `Tumor Size` + ER Status +`Cellularity` + `Age at Diagnosis`  + `Lymph nodes examined positive`+`Relapse Free Status` predictors
+
+M5 <- (coxph(Surv(`Overall Survival (Months)`, died_of_cancer) ~ `Tumor Stage`+`Chemotherapy`+`ER Status`+`Age at Diagnosis`+`Relapse Free Status`+`Lymph nodes examined positive` , data = df_clean))
+# Model with `Tumor Stage`+`Chemotherapy`+`ER Status`+`Age at Diagnosis`+`Relapse Free Status` predictors
+
+M6 <- (coxph(Surv(`Overall Survival (Months)`, died_of_cancer) ~ `Tumor Stage`+`Chemotherapy`+`ER Status`+`Age at Diagnosis`+`Relapse Free Status` , data = df_clean))
+# Model with `Tumor Stage`+`Chemotherapy`+`ER Status`+`Age at Diagnosis` predictors
+
+M7 <- (coxph(Surv(`Overall Survival (Months)`, died_of_cancer) ~ `Tumor Stage`+`Chemotherapy`+`ER Status`+`Age at Diagnosis` , data = df_clean))
 
 summary(M3)
 
@@ -74,7 +86,7 @@ cox.zph(M3)
 anova(M1, M3)
 
 # AIC
-fits <- list(M1 = M1, M2 = M2, M3 = M3)
+fits <- list(M1 = M1, M2 = M2, M3 = M3,M4 = M4, M5 = M5, M6 = M6, M7 = M7 )
 sapply(fits, AIC)
 
 # -------------------
