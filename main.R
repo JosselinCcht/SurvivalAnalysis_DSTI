@@ -76,6 +76,10 @@ M6 <- (coxph(Surv(`Overall Survival (Months)`, died_of_cancer) ~ `Tumor Stage`+`
 
 M7 <- (coxph(Surv(`Overall Survival (Months)`, died_of_cancer) ~ `Tumor Stage`+`Chemotherapy`+`ER Status`+`Age at Diagnosis` , data = df_clean))
 
+#Model with `Age at Diagnosis` + `Type of Breast Surgery` + `Lymph nodes examined positive`+`Tumor Size`+`ER Status`
+M8 <- coxph(Surv(`Overall Survival (Months)`, died_of_cancer) ~ `Age at Diagnosis` + `Type of Breast Surgery` + `Lymph nodes examined positive` , data = df_clean)
+
+
 summary(M3)
 
 # Check proportional hazards assumption
@@ -86,13 +90,13 @@ cox.zph(M3)
 anova(M1, M3)
 
 # AIC
-fits <- list(M1 = M1, M2 = M2, M3 = M3,M4 = M4, M5 = M5, M6 = M6, M7 = M7 )
+fits <- list(M1 = M1, M2 = M2, M3 = M3,M4 = M4, M5 = M5, M6 = M6, M7 = M7, M8 = M8 )
 sapply(fits, AIC)
 
 # -------------------
 
-# Diagnostics for M3, replace with the model of interest
-residuals_diag <- cox.zph(M3)
+# Diagnostics for M8, replace with the model of interest
+residuals_diag <- cox.zph(M8)
 plot(residuals_diag)
 
 # -----------------
